@@ -1,0 +1,26 @@
+grant {
+   permission java.net.SocketPermission "*:1099", 
+      "connect, accept, resolve";
+// This allows RMI clients to contact the RMIRegistry of any host
+
+   permission java.net.SocketPermission "*:1024-65535", 
+      "connect, accept, resolve";
+// This allows RMI clients to make network connections to the public
+// ports on any host
+// If you start the RMIregistry on a port in this range, this will help
+//  to get around the resolve access violation.
+
+   permission java.net.SocketPermission "localhost:1099", 
+      "connect, resolve";
+   permission java.net.SocketPermission "129.65.242.5:1024-",
+      "connect, accept";
+
+// For some reason it is necessary for some people to have the above
+// statements to explicitly allow connection to/from falcon.
+
+   permission java.net.SocketPermission "*:80", 
+      "connect";
+// This allows connection to the default web server on any host - 
+// needed for stub downloading, among other things.
+};
+
